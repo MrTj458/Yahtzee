@@ -1,12 +1,28 @@
 const ROLL_DICE = 'ROLL_DICE'
 const TOGGLE_KEPT = 'TOGGLE_KEPT'
 
+const scores = [
+	{ section: 'upper', name: 'Ones', score: null, value: 1 },
+	{ section: 'upper', name: 'Twos', score: null, value: 2 },
+	{ section: 'upper', name: 'Threes', score: null, value: 3 },
+	{ section: 'upper', name: 'Fours', score: null, value: 4 },
+	{ section: 'upper', name: 'Fives', score: null, value: 5 },
+	{ section: 'upper', name: 'Sixes', score: null, value: 6 },
+	{ section: 'lower', name: 'Three Of A Kind', score: null, addAll: true },
+	{ section: 'lower', name: 'Four Of A Kind', score: null, addAll: true },
+	{ section: 'lower', name: 'Full House', score: null },
+	{ section: 'lower', name: 'Low Straight', score: null },
+	{ section: 'lower', name: 'High Straight', score: null },
+	{ section: 'lower', name: 'Yahtzee', score: null },
+	{ section: 'lower', name: 'Chance', score: null, addAll: true }
+];
+
 export const rollDice = () => {
 	return (dispatch, getState) => {
 		const { keep, dice } = getState().currentGame
 
-		const newDice = dice.map( (d, i) => {
-			if(keep.includes(i))
+		const newDice = dice.map((d, i) => {
+			if (keep.includes(i))
 				return d
 			return Math.floor(Math.random() * 6) + 1
 		})
@@ -20,8 +36,8 @@ export const toggleKept = (i) => {
 		const { keep } = getState().currentGame
 		let updated
 
-		if(keep.includes(i))
-			updated = keep.filter( d => d !== i )
+		if (keep.includes(i))
+			updated = keep.filter(d => d !== i)
 		else
 			updated = [...keep, i]
 
@@ -34,10 +50,11 @@ export default (
 		roll: 0,
 		dice: [...new Array(5)],
 		keep: [],
+		scores,
 	},
 	action
 ) => {
-	switch(action.type) {
+	switch (action.type) {
 		case ROLL_DICE:
 			return {
 				...state,
