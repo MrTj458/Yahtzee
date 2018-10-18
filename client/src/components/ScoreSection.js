@@ -1,7 +1,7 @@
 import React from 'react'
 import ScoreRow from './ScoreRow'
 import { connect } from 'react-redux'
-import { List, Header, Divider, Segment } from 'semantic-ui-react'
+import { List, Header, Segment } from 'semantic-ui-react'
 
 class ScoreSection extends React.Component {
 	total = (score, title) => {

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { LabelGroup } from 'semantic-ui-react';
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
