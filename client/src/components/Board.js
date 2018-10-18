@@ -2,7 +2,7 @@ import React from 'react'
 import Dice from './Dice'
 import { Grid, Button, Divider, Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { rollDice, newGame } from '../reducers/currentGame'
+import { rollDice, newGame, postScore } from '../reducers/currentGame'
 
 const calcScores = (scores) => {
 	return scores.map( s => s.score )
@@ -11,15 +11,19 @@ const calcScores = (scores) => {
 		}, 0)
 }
 
-const checkEndGame = (scores) => {
+const checkEndGame = (scores, dispatch) => {
 	let gameOver = true
-	
+
 	scores.map( s => s.score )
 		.forEach( score => {
 			if(score === null) {
 				gameOver = false
 			}
 		})
+
+		if (gameOver) {
+			dispatch(postScore(this.calcScores(scores)))
+		}
 	
 		return gameOver
 }
@@ -27,7 +31,7 @@ const checkEndGame = (scores) => {
 const Board = ({ roll, dice, keep, dispatch, scores }) => {
 	const maxRoll = roll === 3
 	const disabled = maxRoll ? { disabled: true } : {}
-	const gameOver = checkEndGame(scores)
+	const gameOver = checkEndGame(scores, dispatch)
 	return (
 		<Grid>
 			<Grid.Row>
