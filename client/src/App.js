@@ -8,7 +8,7 @@ import {
 	Register,
 	NavBar,
 } from '@devpoint/dps-react-kit'
-import FetchUser from './FetchUser'
+import FetchUser from './components/FetchUser'
 
 const App = () => (
 	<>
